@@ -138,7 +138,13 @@ The shapes of input-output arrays are as follows:
 #---------------------------------------------------------------------------------------
 st.markdown(temp.format('#66999B','white' , """4. Training the LSTM model"""),unsafe_allow_html=True)
 st.write()
-model = keras.models.load_model("model/model.h5")
+mdl = st.selectbox(options = ["Model-2","Model-1"],label="Select model")
+st.write("Model-1 has higher regularization factor than Model-2, but both gives having MAE ~= 1")
+st.image("MAEs.png")
+if mdl=="Model-1":
+    model = keras.models.load_model("model/model.h5")
+else:
+    model = keras.models.load_model("model/model1.h5")
 st.write("The summary of trained LSTM model is as follows :")
 summ,curve = st.columns((1,1))
 with summ:
@@ -146,6 +152,7 @@ with summ:
     st.image("model1_summary.png")
 with curve:
     st.write("##### LOSS CURVES")
+    st.write("*** of Model-1")
     st.image("loss.png")
 
 #---------------------------------------------------------------------------------------
